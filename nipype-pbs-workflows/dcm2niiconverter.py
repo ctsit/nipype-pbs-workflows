@@ -2,7 +2,7 @@
 Copyright 2014 University of Florida. All rights reserved. 
 Use of this source code is governed by the license found in the LICENSE file.
 
-For instructions on how to use this script please refer to doc/README_dcm2niiconverter.md
+For instructions on how to use this script please refer to doc/README_dcm2nii.md
 """
 
 import os                                    # system functions
