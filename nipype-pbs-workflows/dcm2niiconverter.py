@@ -64,15 +64,7 @@ Define nodes to use
 #Node: Infosource - we use IdentityInterface to create our own node, to specify
 #                   the list of subjects the pipeline should be executed on
 infosource = pe.Node(interface=util.IdentityInterface(fields=['subject_id']),name="infosource")
-
 infosource.iterables =  [('subject_id',subjects_data_list)]
-
-# #Node: Infosource - we use IdentityInterface to create our own node, to specify
-# #                   the list of subjects the pipeline should be executed on
-# subjectsource = pe.Node(interface=util.IdentityInterface(fields=['subject_id,subject_data_id']),
-                                                      # name="subjectsource")
-# subjectsource.iterables = ('subject_data_id', subjects_data_list)
-
 
 dcm2nii_converter = pe.Node(interface=Dcm2nii(),name='dcm2nii')
 dcm2nii_converter.inputs.gzip_output = True
