@@ -2,7 +2,8 @@
 Copyright 2014 University of Florida. All rights reserved. 
 Use of this source code is governed by the license found in the LICENSE file.
 
-For instructions on how to use this script please refer to doc/README_bedpostx.md
+For instructions on how to use this script please refer to 
+doc/README_bedpostx.md
 """
 
 from nipype.workflows.dmri.fsl.dti import create_bedpostx_pipeline
@@ -42,13 +43,15 @@ input_dir = os.path.join(base_dir, args['data'])
 mailid = args['mailid']
 
 if mailid is None:
-    print "Error: Email address needs to be provided as an argument. Please refer README_bedpostx.md for assistance."
+    print "Error: Email address needs to be provided as an argument. Please"\
+    " refer README_bedpostx.md for assistance."
 
 elif not os.path.exists(input_dir):
-    print "Error: Cannot find " + input_dir + ". Please make sure that input files are located as mentioned in README_bedpostx.md."
+    print "Error: Cannot find " + input_dir + ". Please make sure that input"\
+    " files are located as mentioned in README_bedpostx.md."
 
 else:
-    # ------------------Generating PBS template on the fly-----------------------
+    # ------------------Generating PBS template on the fly-------------------
 
     template = '''#PBS -N bedpostx_via_nipype
     #PBS -M ''' + mailid + '''
@@ -66,12 +69,13 @@ else:
         temp_file.write(template)
 
 
-    # ---------------Creating nipype workflow for bedpostx-----------------------
+    # ---------------Creating nipype workflow for bedpostx-------------------
 
     nipype_bedpostx = create_bedpostx_pipeline("nipype_bedpostx")
 
     nipype_bedpostx.inputs.inputnode.dwi = os.path.join(input_dir, 'data.nii')
-    nipype_bedpostx.inputs.inputnode.mask = os.path.join(input_dir, 'nodif_brain_mask.nii')
+    nipype_bedpostx.inputs.inputnode.mask = os.path.join(
+        input_dir, 'nodif_brain_mask.nii')
     nipype_bedpostx.inputs.inputnode.bvecs = os.path.join(input_dir, 'bvecs')
     nipype_bedpostx.inputs.inputnode.bvals = os.path.join(input_dir, 'bvals')
     nipype_bedpostx.inputs.xfibres.n_fibres = 1
@@ -85,11 +89,13 @@ else:
     workflow.base_dir = base_dir
     workflow.config['execution'] = {'logging': 'DEBUG'}
 
-    result = workflow.run(plugin='PBS', plugin_args=dict(template=os.path.join(base_dir, JOB_TEMPLATE_NAME)))
+    result = workflow.run(plugin='PBS', plugin_args=dict(
+        template=os.path.join(base_dir, JOB_TEMPLATE_NAME)))
 
 
     # cleaning up
     try:
         os.remove(os.path.join(base_dir, JOB_TEMPLATE_NAME))
     except OSError:
-        print "Error while deleting " + os.path.join(base_dir, JOB_TEMPLATE_NAME)
+        print "Error while deleting " + os.path.join(
+            base_dir, JOB_TEMPLATE_NAME)
