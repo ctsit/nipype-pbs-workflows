@@ -1,9 +1,9 @@
-# Login to research computing machine:
+# Steps to execute the bedpostx script:
+
+## Login to research computing machine:
 
 Login to your research computing machine from the terminal using your credentials as follows:
 	ssh <username>@hipergator.rc.ufl.edu
-
-# Steps to execute bedpostx_parallel script:
 
 ## Loading necessary modules
 
@@ -18,18 +18,18 @@ Following is the list of software modules that are required to be loaded in the 
 To load these software modules onto your research computing machine, please run the following commands on your terminal:
 
 
-	module load python/2.7.6
+	$ module load python/2.7.6
 
-	module load nipype/0.8
+	$ module load nipype/0.8
 	
-	module load fsl/5.0.5
+	$ module load fsl/5.0.5
 	
 ## Running bedpostx_parallel.py
 To run bedpostx_parallel.py script, change directory (cd) to the directory which contains the script and run the script as shown below:
 
-	cd nipype_scripts
+	$ cd nipype_scripts
 	
-	python bedpostx_parallel.py -m <email-id>
+	$ python bedpostx_parallel.py -m <email-id>
 
 ## Usage
 
@@ -44,7 +44,7 @@ To run bedpostx_parallel.py script, change directory (cd) to the directory which
      - -d, --data: Name of the folder in the scratch folder containing the input data. If this is not provided then the program assumes the name to be "data"
 
 
-#required input files:
+## Required input files:
 
 	bvals
 
@@ -59,8 +59,8 @@ To run bedpostx_parallel.py script, change directory (cd) to the directory which
 Note that the above mentioned files should be present in a folder under /scratch/lfs/$username. If the name of the that folder is different from "data", please provide it as a command line argument as shown in the usage.
 
 
-#output:
+## Output:
 	workflow folder
 
 
-For more information on the contents of the input files and the workflow folder, please refer `http://fsl.fmrib.ox.ac.uk/fsl/fsl4.0/fdt/fdt_bedpostx.html`
+For more information on the contents of the input files and the workflow folder, please refer http://fsl.fmrib.ox.ac.uk/fsl/fsl4.0/fdt/fdt_bedpostx.html
