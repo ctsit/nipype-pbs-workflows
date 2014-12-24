@@ -1,11 +1,11 @@
-# Login to research computing machine:
+# Steps to execute the dcm2niiconverter script:
+
+## Login to research computing machine:
 
 Login to your research computing machine from the terminal using your credentials as follows:
 	ssh <username>@hipergator.rc.ufl.edu
 
-# Steps to execute dcm2niiconverter.py script:
-
-## Loading necessary modules
+## Loading necessary modules:
 
 Following is the list of software modules that are required to be loaded in the research computing machine to run bedpostx:
 
