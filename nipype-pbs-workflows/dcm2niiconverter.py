@@ -2,7 +2,8 @@
 Copyright 2014 University of Florida. All rights reserved. 
 Use of this source code is governed by the license found in the LICENSE file.
 
-For instructions on how to use this script please refer to doc/README_dcm2niiconverter.md
+For instructions on how to use this script please refer to 
+doc/README_dcm2nii.md
 """
 
 import os                                    # system functions
@@ -43,13 +44,14 @@ Define experiment specific parameters
 experiment_dir = args['path'] 
 
 #Specification of a list containing the identifier of each subject
-subjects_data_list = ['64-axial','6-axial','6-sagittal','64-sagittal','FLAIR','T1-1','T1-2','T2']
+subjects_data_list = ['64-axial','6-axial','6-sagittal','64-sagittal',
+'FLAIR','T1-1','T1-2','T2']
 
 #Specification of the name of the dicom and output folder 
-dicom_dir_name = args['dicom'] #if the path to the dicoms is: '~SOMEPATH/experiment/dicom'
-data_dir_name = args['output']   #if the path to the data should be: '~SOMEPATH/experiment/data'
-
-# param_set =[]
+dicom_dir_name = args['dicom'] #if the path to the dicoms is: 
+                               #'~SOMEPATH/experiment/dicom'
+data_dir_name = args['output'] #if the path to the data should be: 
+                               #'~SOMEPATH/experiment/data'
 
 for subject in subjects_data_list:
     if not os.path.exists(experiment_dir + '/' + data_dir_name +'/'+subject):
@@ -61,18 +63,12 @@ for subject in subjects_data_list:
 Define nodes to use
 """
 
-#Node: Infosource - we use IdentityInterface to create our own node, to specify
-#                   the list of subjects the pipeline should be executed on
-infosource = pe.Node(interface=util.IdentityInterface(fields=['subject_id']),name="infosource")
-
+#Node: Infosource - we use IdentityInterface to create our own node, to 
+#                   specify the list of subjects the pipeline should be 
+#                   executed on
+infosource = pe.Node(interface=util.IdentityInterface(fields=['subject_id']),
+    name="infosource")
 infosource.iterables =  [('subject_id',subjects_data_list)]
-
-# #Node: Infosource - we use IdentityInterface to create our own node, to specify
-# #                   the list of subjects the pipeline should be executed on
-# subjectsource = pe.Node(interface=util.IdentityInterface(fields=['subject_id,subject_data_id']),
-                                                      # name="subjectsource")
-# subjectsource.iterables = ('subject_data_id', subjects_data_list)
-
 
 dcm2nii_converter = pe.Node(interface=Dcm2nii(),name='dcm2nii')
 dcm2nii_converter.inputs.gzip_output = True
@@ -82,7 +78,8 @@ dcm2nii_converter.inputs.reorient_and_crop = False
 # Initiation of the preparation pipeline
 prepareflow = pe.Workflow(name="prepareflow")
   
-# Define where the workingdir of the all_consuming_workflow should be stored at
+# Define where the workingdir of the all_consuming_workflow should be stored 
+# at
 prepareflow.base_dir = experiment_dir + '/workingdir_prepareflow'
 
 #Define pathfinder function
@@ -99,10 +96,11 @@ def output_directory(subject, experiment_dir, data_dir_name):
     return os.path.join(experiment_dir, data_dir_name,subject)
 
 #Connect all components
-prepareflow.connect([(infosource, dcm2nii_converter,[(('subject_id',pathfinder, experiment_dir, dicom_dir_name),
-                                                 'source_names'),(('subject_id', output_directory, experiment_dir, data_dir_name),
-                                                 'output_dir')])
-                     ])
+prepareflow.connect([(infosource, dcm2nii_converter,
+    [(('subject_id',pathfinder, experiment_dir, dicom_dir_name),
+        'source_names'),
+    (('subject_id', output_directory, experiment_dir, data_dir_name),
+        'output_dir')])])
 
 # Run pipeline and create graph
 prepareflow.run(plugin='MultiProc', plugin_args={'n_procs' : 7})

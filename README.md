@@ -1,11 +1,11 @@
 ## nipype-workflows
 
-This repository consists of neuroimaging workflows writtten in nipype with a focus on the Portable Batch System (PBS) job scheduler.
-It provides tools and documentation for BMC users using the services of UF's Researchcomputing (RC) group.
+This repository consists of neuroimaging workflows written in nipype with a focus on the Portable Batch System (PBS) job scheduler.
+It provides tools and documentation to neuroscientists for using the services of UF's Research Computing (RC) group.
 
 ### Installation
 
-In order to run the code provided in this repository the following software need to be avaliable:
+In order to run the code provided in this repository the following software need to be available:
 
  - PBS Job scheduler
  - Required Modules:
