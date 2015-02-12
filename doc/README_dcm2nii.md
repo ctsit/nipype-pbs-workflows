@@ -3,7 +3,7 @@
 ## Login to research computing machine:
 
 Login to your research computing machine from the terminal using your credentials as follows:
-	ssh <username>@hipergator.rc.ufl.edu
+    ssh <username>@hipergator.rc.ufl.edu
 
 ## Loading necessary modules:
 
@@ -12,7 +12,7 @@ Following is the list of software modules that are required to be loaded in the 
 1) Python: Python is a programming language we use to write our scripts. For more information about python please refer `https://www.python.org`
 
 2) Nipype: Nipype is open-source neuroimaging software written in python to provide tools to analyze data using variety of different algorithms. For more information about Nipype please refer `http://nipy.sourceforge.net/nipype/`
-	
+
 3) FSL: FSL is a comprehensive library of analysis tools for FMRI, MRI,and DTI brain imaging data.
 
 4) MRIcron: provides dcm2nii for the nipype, which attempts to convert images from the proprietary scanner format to the NIfTI format used by brain imaging tools.
@@ -20,22 +20,14 @@ Following is the list of software modules that are required to be loaded in the 
 To load these software modules onto your research computing machine, please run the following commands on your terminal:
 
 
-	module load python/2.7.6
+    module load nipype/0.10.0
 
-	module load nipype/0.8
-	
-	module load fsl/5.0.5
 
-	module load mricron/201306
-	
 ## Running dcm2niiconverter.py
-To run dcm2niiconverter.py script, change directory (cd) to the directory which contains the script and run the script as shown below:
 
-	cd nipype_scripts
-	
-	python dcm2niiconverter.py -p /scratch/lfs/<your-username>/<name-of-the-folder-in-the-experiment-folder-containing-the-dicoms>
+    dcm2niiconverter.py -p /scratch/lfs/<your-username>/<name-of-the-folder-in-the-experiment-folder-containing-the-dicoms>
 
-	(e.g.: python dcm2niiconverter.py -p /scratch/lfs/user1/DICOM)
+    (e.g.: dcm2niiconverter.py -p /scratch/lfs/user1/DICOM)
 
 ## Usage
 
