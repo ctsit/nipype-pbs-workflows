@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 Copyright 2014 University of Florida. All rights reserved. 
 Use of this source code is governed by the license found in the LICENSE file.
